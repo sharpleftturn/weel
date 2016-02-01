@@ -1,0 +1,54 @@
+<resources>
+    <!-- Application strings -->
+    <string name="app_name">WeeL</string>
+    <string name="app_account_type">com.weel</string>
+    <string name="api_url">https://app.getweel.com/api/v1</string>
+    <string name="api_logout_uri">/users/session/destroy</string>
+    <string name="api_user_uri">/users/current</string>
+    <string name="api_user_vehicles_uri">/users/current/vehicles</string>
+    <string name="app_version">weel_android_1.0</string>
+    <string name="app_coupon_code">beta</string>
+
+    <!-- Global strings -->
+    <string name="action_cancel">CANCEL</string>
+    <string name="action_continue">CONTINUE</string>
+    <string name="alert_dialog_single_button_label">OK</string>
+    <string name="hint_email">Email address</string>
+    <string name="hint_password">Password</string>
+    <string name="authentication_error">There was a problem authenticating your account. Please login.</string>
+
+    <!-- Drawer Strings -->
+    <string name="action_ask">Live Mechanic Advice</string>
+    <string name="action_call">Roadside Assistance</string>
+    <string name="action_deals">WeeL Deals</string>
+    <string name="action_maintenance">Maintenance Schedule</string>
+    <string name="action_signout">Sign out</string>
+
+    <!-- Add Vehicle Strings -->
+    <string name="vehicle_selection_error_message"></string>
+    <string name="alert_dialog_button_label"></string>
+    <string name="vin_vehicle_uri"></string>
+    <string name="all_makes_uri">/vehicles/makes</string>
+    <string name="all_models_uri">/vehicles/makes/%1$s/models</string>
+    <string name="all_model_years_uri">/vehicles/models/%1$s/years</string>
+
+    <!-- Roadside Strings -->
+    <string name="roadside_instruct_call"></string>
+    <string name="no_geocoder_available"></string>
+    <string name="roadside_oem_title"></string>
+    <string name="roadside_confirm_label"></string>
+    <string name="roadside_uri"></string>
+    <string name="error_roadside_location"></string>
+    <string name="roadside_oem_message"></string>
+    <string name="option_call"></string>
+    <string name="roadside_map_location"></string>
+    <string name="roadside_list_header_label"></string>
+    <string name="no_roadside_service_label"></string>
+
+    <!-- Activity Title Strings -->
+    <string name="title_activity_vehicle_profile">VehicleProfileActivity</string>
+    <string name="title_activity_deals">WeeL Deals</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="roadside_service_items">
+        <item>Tow</item>
+        <item>Battery boost</item>
+        <item>Flat tire</item>
+        <item>Emergency gasoline</item>
+        <item>Key lockout</item>
+    </string-array>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
+
+    <RelativeLayout
+        android:id="@+id/roadside"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/map" />
+
+    <TextView
+        android:id="@+id/instruct_call_mechanic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/roadside_phone"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="42dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="@string/roadside_instruct_call"/>
+
+    <ImageButton
+        android:id="@+id/roadside_phone"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/fab_button_margin_bottom"
+        android:layout_marginRight="@dimen/fab_button_margin_right"
+        android:background="@drawable/fab_shape"
+        android:src="@drawable/ic_local_phone_white_24dp"
+        android:tint="@android:color/white" />
+
+</RelativeLayout>

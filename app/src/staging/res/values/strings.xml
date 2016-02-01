@@ -1,0 +1,5 @@
+
+<resources>
+    <string name="app_name">WeeL (Staging)</string>
+    <string name="api_url">https://dev.getweel.com/api/v1</string>
+</resources>

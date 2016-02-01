@@ -1,0 +1,6 @@
+<resources>
+
+    <!-- Strings related to login -->
+    <string name="action_login">SIGN IN</string>
+    <string name="signup_label">Not a member? Sign up</string>
+</resources>

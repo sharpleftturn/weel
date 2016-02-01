@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/make_spinner"
+        android:tag="make_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp" />
+
+    <Spinner
+        android:id="@+id/model_spinner"
+        android:tag="model_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        android:layout_below="@+id/make_spinner" />
+
+    <Spinner
+        android:id="@+id/year_spinner"
+        android:tag="year_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        android:layout_below="@+id/model_spinner" />
+
+</RelativeLayout>
