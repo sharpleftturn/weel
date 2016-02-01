@@ -218,6 +218,7 @@ public class AddVehicleActivity extends WeeLActivity implements AddVehicleFragme
             data.putSerializable(EXTRA_VEHICLEDATA, vehicle);
             data.putString(AccountManager.KEY_AUTHTOKEN, authToken);
 
+
             saveVehicle(data);
 
             if (vehicle != null) {
@@ -255,6 +256,7 @@ public class AddVehicleActivity extends WeeLActivity implements AddVehicleFragme
 
     private void showError(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         builder.setMessage(message)
                 .setPositiveButton(getString(R.string.alert_dialog_button_label), new DialogInterface.OnClickListener() {
                     @Override
