@@ -10,7 +10,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.weel.mobile.android.R;
 import com.weel.mobile.android.model.User;
@@ -24,7 +25,7 @@ import static com.weel.mobile.android.account.Account.AUTHTOKEN_TYPE_API_ACCESS;
 /**
  * Created by jeremy.beckman on 2015-10-06.
  */
-public abstract class WeeLActivity extends FragmentActivity {
+public abstract class WeeLActivity extends AppCompatActivity implements Thread.UncaughtExceptionHandler {
     public static final String EXTRA_USER_VEHICLE = "com.weel.mobile.android.extras.USER_VEHICLE";
     public static final String EXTRA_USER = "com.weel.mobile.android.extras.USER";
     public static final String RESULT_CODE = "com.weel.mobile.android.intent.RESULT_CODE";
@@ -34,12 +35,17 @@ public abstract class WeeLActivity extends FragmentActivity {
     protected User user;
     protected ArrayList<Vehicle> vehicles;
     protected AccountManager accountManager;
+    protected Toolbar toolbar;
+
+    public void uncaughtException(Thread thread, Throwable ex) {
+        showSingleButtonAlert(getString(R.string.uncaught_exception_message));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Thread.setDefaultUncaughtExceptionHandler(new WeeLExceptionHandler(this));
+        Thread.setDefaultUncaughtExceptionHandler(this);
 
         accountManager = AccountManager.get(getApplicationContext());
     }
@@ -67,7 +73,7 @@ public abstract class WeeLActivity extends FragmentActivity {
 
     protected AccountManagerFuture<Bundle> getAuthToken(AccountManager accountManager, @Nullable AccountManagerCallback getAuthCallback) {
         Bundle options = new Bundle();
-        options.putString(ApplicationResources.RESOURCE_API_URL, getString(R.string.api_url));
+        options.putString(ApplicationResources.RESOURCE_API_URL, getString(R.string.api_url) + getString(R.string.api_authenticate_uri));
         return accountManager.getAuthToken(account, AUTHTOKEN_TYPE_API_ACCESS, options, this, getAuthCallback, null);
     }
 
@@ -79,6 +85,15 @@ public abstract class WeeLActivity extends FragmentActivity {
         Intent intent = new Intent(context, aClass);
         intent.putExtras(options);
         startActivity(intent);
+    }
+
+    protected void getAppData() {
+
+    }
+
+    protected void addToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     protected abstract void setView();

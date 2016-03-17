@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_logout">Log out</string>
+    <string name="action_logout">Sign out</string>
 </resources>

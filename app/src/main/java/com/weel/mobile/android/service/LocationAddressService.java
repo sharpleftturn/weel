@@ -34,7 +34,7 @@ public class LocationAddressService extends IntentService {
     protected ResultReceiver mReceiver;
 
     /**
-     * Starts this service to perform action Foo with the given parameters. If
+     * Starts this service to perform action FetchAddress with the given parameters. If
      * the service is already performing a task this action will be queued.
      *
      * @see IntentService
@@ -64,10 +64,6 @@ public class LocationAddressService extends IntentService {
         }
     }
 
-    /**
-     * Handle action Foo in the provided background thread with the provided
-     * parameters.
-     */
     private void handleActionFetchAddress(Location location) {
         List<Address> addresses = null;
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());

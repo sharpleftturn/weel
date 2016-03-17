@@ -3,11 +3,17 @@
     <string name="app_name">WeeL</string>
     <string name="app_account_type">com.weel</string>
     <string name="api_url">https://app.getweel.com/api/v1</string>
+    <string name="api_authenticate_uri">/users/authenticate</string>
+    <string name="api_signup_uri">/users</string>
     <string name="api_logout_uri">/users/session/destroy</string>
     <string name="api_user_uri">/users/current</string>
     <string name="api_user_vehicles_uri">/users/current/vehicles</string>
     <string name="app_version">weel_android_1.0</string>
     <string name="app_coupon_code">beta</string>
+    <string name="app_timestamp_format">yyyyMMdd_HHmmss</string>
+    <string name="app_capture_file_prefix">IMG</string>
+    <string name="app_capture_file_type">jpg</string>
+    <string name="default_vehicle_image">R.drawable.sample</string>
 
     <!-- Global strings -->
     <string name="action_cancel">CANCEL</string>
@@ -16,39 +22,127 @@
     <string name="hint_email">Email address</string>
     <string name="hint_password">Password</string>
     <string name="authentication_error">There was a problem authenticating your account. Please login.</string>
+    <string name="selected">selected</string>
+    <string name="uncaught_exception_message">Oops! Something unexpected happened</string>
+    <string name="security_exception_message">App does not have permission to use this feature</string>
+
+    <!-- Toolbar Strings -->
+    <string name="action_select_all">Select All</string>
+    <string name="action_drawer_open">Swipe right to open navigation drawer</string>
+    <string name="action_drawer_close">Swipe left to close navigation drawer</string>
 
     <!-- Drawer Strings -->
     <string name="action_ask">Live Mechanic Advice</string>
     <string name="action_call">Roadside Assistance</string>
     <string name="action_deals">WeeL Deals</string>
     <string name="action_maintenance">Maintenance Schedule</string>
+    <string name="action_service_records">Service Records</string>
     <string name="action_signout">Sign out</string>
 
     <!-- Add Vehicle Strings -->
+    <string name="vehicle_toolbar_label">Add Your Vehicle</string>
     <string name="vehicle_selection_error_message"></string>
-    <string name="alert_dialog_button_label"></string>
+    <string name="alert_dialog_button_label">OK</string>
     <string name="vin_vehicle_uri"></string>
     <string name="all_makes_uri">/vehicles/makes</string>
     <string name="all_models_uri">/vehicles/makes/%1$s/models</string>
     <string name="all_model_years_uri">/vehicles/models/%1$s/years</string>
 
+    <!-- Vehicle Profile Strings -->
+    <string name="profile_toolbar_label">Vehicle Profile</string>
+
     <!-- Roadside Strings -->
+    <string name="roadside_toolbar_label">Roadside Assistance</string>
     <string name="roadside_instruct_call"></string>
     <string name="no_geocoder_available"></string>
-    <string name="roadside_oem_title"></string>
-    <string name="roadside_confirm_label"></string>
-    <string name="roadside_uri"></string>
-    <string name="error_roadside_location"></string>
+    <string name="roadside_oem_title">Choose a Program</string>
+    <string name="roadside_confirm_label">CONFIRM YOUR LOCATION</string>
+    <string name="roadside_uri">/users/current/vehicles/%1$s/roadside-assistance</string>
+    <string name="error_roadside_location">There was a problem accessing your location</string>
     <string name="roadside_oem_message"></string>
-    <string name="option_call"></string>
-    <string name="roadside_map_location"></string>
-    <string name="roadside_list_header_label"></string>
+    <string name="option_call">Call %1$s</string>
+    <string name="roadside_map_location">Your location</string>
+    <string name="roadside_list_header_label">SELECT YOUR REQUESTED SERVICE</string>
     <string name="no_roadside_service_label"></string>
 
+    <!-- Dashboard Strings -->
+    <string name="dashboard_advice_label">Live Mechanic</string>
+    <string name="dashboard_roadside_label">Roadside Assistance</string>
+    <string name="dashboard_deals_label">WeeL Deals</string>
+    <string name="dashboard_maintenance_label">Maintenance Schedule</string>
+    <string name="dashboard_brand_message_1">How can</string>
+    <string name="dashboard_brand_message_3">help?</string>
+
+    <!-- Maintenance Strings -->
+    <string name="maintenance_toolbar_label">Maintenance Schedule</string>
+    <string name="maintenance_uri">/users/current/vehicles/%1$s/maintenance-plan</string>
+    <string name="no_maintenance_message">We couldn\'t find anything for your vehicle</string>
+    <string name="maintenance_empty">No Schedule</string>
+
+    <!-- Service History Strings -->
+    <string name="service_toolbar_label">Service Records</string>
+    <string name="action_image_photo">Use Camera</string>
+    <string name="action_image_gallery">Choose from Gallery</string>
+    <string name="add_invoice_label">Add Your Invoice</string>
+    <string name="service_record_name_hint">New Service Record</string>
+    <string name="service_record_date_hint">MM/DD/YYYY</string>
+    <string name="service_record_address_hint">New Location</string>
+    <string name="service_record_cost_hint">$0.00</string>
+    <string name="service_record_status_hint">No status</string>
+    <string name="service_record_not_processed">Pending</string>
+    <string name="service_history_header_label">Upload and manage you service records</string>
+
+    <!-- Service Records Strings -->
+    <string name="service_description"></string>
+    <string name="service_description_message"></string>
+    <string name="service_records_uri">/users/current/vehicles/%1$s/maintenance-records</string>
+    <string name="action_service_record_save">SAVE</string>
+    <string name="no_service_message">No service records found for your vehicle.</string>
+    <string name="empty">Add invoices</string>
+    <string name="notification_upload_started">Uploading service record</string>
+    <string name="notification_upload_complete">Upload complete</string>
+    <string name="notification_upload_failed">Upload failed</string>
+    <string name="notification_upload_started_detail">Image attachment upload started</string>
+    <string name="notification_upload_complete_detail">Image attachment uploaded successfully</string>
+
+
+    <!-- WeeL Deals Strings -->
+    <string name="deals_vendor_protocol">http://</string>
+    <string name="deals_uri">/users/current/vehicles/%1$s/deals</string>
+    <string name="deals_header_label">Browse Deals</string>
+
+    <!-- Mechanic Strings -->
+    <string name="ask_mechanic_message">WeeL provides access to certified mechanics to get advice on a variety of situations</string>
+    <string name="mechanic_uri">/users/current/vehicles/%1$s/mechanic-advice</string>
+    <string name="ask_mechanic_diagnosis_label">Car Diagnosis</string>
+    <string name="ask_mechanic_diagnosis_message">Uncertain what the problem is with your car? Our live mechanics will help you diagnose the concern fast and efficiently.</string>
+    <string name="ask_mechanic_quality_message">WeeL mechanics know which widely available auto products are the best in the industry. Call us before replacing your brakes, wipers, headlights, etc.</string>
+    <string name="ask_mechanic_quality_label">Quality &amp; Price Checks</string>
+    <string name="ask_mechanic_repair_message">You\'ve been quoted for a repair on your vehicle and don\'t trust the estimate. Our mechanics are experts on all aspects of labor and repair costs. Talk to us before you pay the quoted price.</string>
+    <string name="ask_mechanic_repair_label">Repair Quotes</string>
+    <string name="mechanic_toolbar_label">Live Mechanic Advice</string>
+
+    <!-- Login Strings -->
+    <string name="login_message_1">Login to your</string>
+    <string name="login_message_2">account</string>
+
     <!-- Activity Title Strings -->
-    <string name="title_activity_vehicle_profile">VehicleProfileActivity</string>
-    <string name="title_activity_deals">WeeL Deals</string>
+    <string name="title_activity_vehicle_profile">Vehicle Profile</string>
+    <string name="title_activity_add_vehicle">Add Vehicle</string>
+    <string name="title_activity_deals">Browse Deals</string>
+    <string name="title_activity_service_record">Service Record</string>
+    <string name="title_activity_add_service_record">Add Service Record</string>
+    <string name="title_activity_service_history">Service History</string>
+    <string name="title_activity_roadside_assistance">Roadside Assistance</string>
+    <string name="title_activity_maintenance">Maintenance Schedule</string>
+    <string name="title_activity_mechanic">Live Mechanic</string>
+    <string name="title_activity_signup">Create New Account</string>
+
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Error Strings -->
+    <string name="image_capture_error">There was a problem saving your image</string>
+
 </resources>

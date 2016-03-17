@@ -23,6 +23,10 @@ public class Constants {
     public static final String ADD_NEW_ACCOUNT = "addNewAccount";
     public static final int SUCCESS_RESULT = 0;
     public static final int FAILURE_RESULT = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 999;
+    public static final int REQUEST_IMAGE_GALLERY = 998;
+    public static final int REQUEST_ADD_SERVICE_RECORD = 997;
+    public static final int REQUEST_SERVICE_RECORD = 996;
     public static final String PACKAGE_NAME = "com.google.android.gms.location.sample.locationaddress";
     public static final String RECEIVER = PACKAGE_NAME + ".RECEIVER";
     public static final String RESULT_DATA_KEY = PACKAGE_NAME + ".RESULT_DATA_KEY";
@@ -31,4 +35,11 @@ public class Constants {
     public static final String OPTION_SIGNUP = "com.weel.mobile.main.options.SIGNUP";
     public static final String OPTION_LOGIN = "com.weel.mobile.main.options.LOGIN";
     public static final String INIT_FILE =  "init_weel_android";
+    public static final String EMPTY = "empty";
+    public static final String NAME = "name";
+    public static final String DATE = "date";
+    public static final String COST = "cost";
+    public static final String LOCATION = "location";
+    public static final String STATUS = "status";
 }
+

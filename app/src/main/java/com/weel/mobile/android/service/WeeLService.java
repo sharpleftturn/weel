@@ -1,8 +1,8 @@
 package com.weel.mobile.android.service;
 
 import android.util.JsonReader;
-
-import org.apache.http.NameValuePair;
+import android.util.JsonToken;
+import android.util.Pair;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,7 +12,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class WeeLService {
         return jsonReader;
     }
 
-    protected JsonReader postData(String path, List<NameValuePair> params) {
+    protected JsonReader postData(String path, List<Pair<String, String>> params) {
         JsonReader jsonReader = null;
         try {
             URL url = new URL(path);
@@ -91,10 +90,10 @@ public class WeeLService {
             connection.setRequestProperty("Cache-Control", "no-cache");
 
             StringBuilder builder = new StringBuilder();
-            for (NameValuePair pair : params) {
-                builder.append(URLEncoder.encode(pair.getName(), "UTF-8"));
+            for (Pair pair : params) {
+                builder.append(URLEncoder.encode((String) pair.first, "UTF-8"));
                 builder.append("=");
-                builder.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+                builder.append(URLEncoder.encode((String) pair.second, "UTF-8"));
                 builder.append("&");
             }
             builder.deleteCharAt(builder.length() - 1);

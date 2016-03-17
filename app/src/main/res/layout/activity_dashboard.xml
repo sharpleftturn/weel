@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_layout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:layout_height="match_parent" >
 
-    <RelativeLayout
-        android:id="@+id/content_frame"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#29b473" />
+        android:layout_below="@+id/toolbar"
+        android:background="#ffffff">
 
-</android.support.v4.widget.DrawerLayout>
+        <RelativeLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#29b473">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_weel_logo_128_176_dp" />
+
+            <TextView
+                android:id="@+id/brand_message_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                android:layout_toRightOf="@+id/logo"
+                android:text="@string/dashboard_brand_message_1"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/brand_message_mid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/brand_message_start"
+                android:layout_toRightOf="@+id/logo"
+                android:src="@drawable/wordmark_white_110dp" />
+
+            <TextView
+                android:id="@+id/brand_message_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/brand_message_mid"
+                android:layout_below="@+id/brand_message_start"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/brand_message_mid"
+                android:text="@string/dashboard_brand_message_3"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.DrawerLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:elevation="4dp"
+        android:theme="@style/CustomActionBarOverlay" />
+
+</RelativeLayout>

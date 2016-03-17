@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import com.weel.mobile.android.R;
 import com.weel.mobile.android.model.Photo;
 import com.weel.mobile.android.model.User;
@@ -38,7 +39,6 @@ import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 /**
- *
  * @author jeremy.beckman
  */
 public class VehicleProfileActivity extends WeeLActivity {
@@ -54,7 +54,7 @@ public class VehicleProfileActivity extends WeeLActivity {
         super.onCreate(icicle);
         setContentView(R.layout.activity_vehicle_profile);
 
-     //   getActionBar().setTitle(getString(R.string.title_activity_vehicle_profile));
+        addToolbar();
 
         Intent intent = getIntent();
         vehicle = (Vehicle) intent.getSerializableExtra(EXTRA_VEHICLEDATA);
@@ -89,6 +89,12 @@ public class VehicleProfileActivity extends WeeLActivity {
     public void onResume() {
         super.onResume();
         showVehicleProfile();
+    }
+
+    @Override
+    protected void addToolbar() {
+        super.addToolbar();
+        toolbar.setTitle(R.string.profile_toolbar_label);
     }
 
     @Override
@@ -130,10 +136,10 @@ public class VehicleProfileActivity extends WeeLActivity {
         Spinner spinner = (Spinner) findViewById(R.id.ownership_value);
         String ownership = vehicle.getOwnership();
 
-        if(ownership != null) {
-            if(ownership.equals("New")) {
+        if (ownership != null) {
+            if (ownership.equals("New")) {
                 spinner.setSelection(0);
-            } else if(ownership.equals("Used")) {
+            } else if (ownership.equals("Used")) {
                 spinner.setSelection(1);
             }
         }
@@ -253,32 +259,33 @@ public class VehicleProfileActivity extends WeeLActivity {
     }
 
     private void loadVehicleProfileImage() throws IOException {
-        try {
-            ImageView profileImageView = (ImageView) findViewById(R.id.vehicle_image);
+        Bitmap bitmap = null;
 
-            Photo vehiclePhoto = vehicle.getPhoto();
+        ImageView profileImageView = (ImageView) findViewById(R.id.vehicle_image);
 
-            String photoUrl;
+        Photo vehiclePhoto = vehicle.getPhoto();
 
-            if (vehiclePhoto.getFullUrl() == null) {
-                Uri uri = Uri.parse("R.drawable.ic_local_phone_white_24dp");
+        if (vehiclePhoto != null) {
+            String photoUrl = vehiclePhoto.getFullUrl();
 
-
-            } else {
-
+            if (photoUrl != null) {
+                try {
+                    URL url = new URL(photoUrl);
+                    AsyncTask<URL, Void, Bitmap> asyncTask = new BitmapWorkerTask(profileImageView).execute(url);
+                    bitmap = asyncTask.get();
+                } catch (ExecutionException ee) {
+                    Log.d(TAG, ee.getMessage());
+                } catch (InterruptedException ie) {
+                    Log.d(TAG, ie.getMessage());
+                }
             }
+        }
 
-            URL url = new URL(vehiclePhoto.getFullUrl());
-            AsyncTask<URL, Void, Bitmap> asyncTask = new BitmapWorkerTask(profileImageView).execute(url);
-            Bitmap bitmap = asyncTask.get();
-
-            if (bitmap != null) {
-                profileImageView.setImageBitmap(bitmap);
-            }
-        } catch (ExecutionException ee) {
-            Log.d(TAG, ee.getMessage());
-        } catch (InterruptedException ie) {
-            Log.d(TAG, ie.getMessage());
+        if (bitmap != null) {
+            profileImageView.setImageBitmap(bitmap);
+        } else {
+            Uri uri = Uri.parse(getString(R.string.default_vehicle_image));
+            profileImageView.setImageURI(uri);
         }
     }
 

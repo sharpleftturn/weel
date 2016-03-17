@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="18dp"
-    android:layout_marginRight="18dp" >
+    android:layout_height="match_parent" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:elevation="4dp"
+        android:theme="@style/CustomActionBarOverlay" />
 
     <EditText
         android:id="@+id/fullname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:hint="@string/hint_full_name"/>
 
     <EditText
@@ -18,6 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:layout_below="@+id/fullname"
         android:inputType="textEmailAddress"
         android:hint="@string/hint_email"/>
@@ -27,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:layout_below="@+id/email"
         android:inputType="textPassword"
         android:hint="@string/hint_password"/>
@@ -38,6 +51,7 @@
         android:layout_marginRight="8dp"
         android:layout_below="@+id/password"
         android:layout_toLeftOf="@+id/cancel"
+        android:background="@drawable/weel_button"
         android:textColor="#ffffff"
         android:text="@string/action_signup" />
 
@@ -47,6 +61,8 @@
         android:layout_height="36dp"
         android:layout_below="@+id/password"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/weel_button_white"
         android:textColor="#29b473"
         android:text="@string/action_cancel" />
 </RelativeLayout>

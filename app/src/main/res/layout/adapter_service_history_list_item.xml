@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="18dp"
+        android:tag="name"
+        android:hint="@string/service_record_name_hint"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/service_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_below="@+id/item"
+        android:tag="date"
+        android:hint="@string/service_record_date_hint"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/service_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_below="@+id/service_date"
+        android:tag="location"
+        android:hint="@string/service_record_address_hint"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/service_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_below="@+id/service_location"
+        android:tag="cost"
+        android:hint="@string/service_record_cost_hint"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/service_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="18dp"
+        android:layout_below="@+id/service_cost"
+        android:tag="status"
+        android:hint="@string/service_record_status_hint"
+        android:textSize="14sp" />
+
+</RelativeLayout>

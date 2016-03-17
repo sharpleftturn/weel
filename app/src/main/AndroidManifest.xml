@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.weel.mobile.android" >
 
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="23" />
+
+    <uses-feature android:name="android.hardware.camera2" android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -9,16 +15,18 @@
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_weel_logo_48dp"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,17 +37,21 @@
 
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/app_name"
+            android:label="Sign In"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".activity.SignupActivity"
-            android:label="@string/app_name"
+            android:label="Sign Up"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".activity.DashboardActivity"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <activity
             android:name=".activity.AddVehicleActivity"
-            android:label="AddVehicleActivity" >
+            android:label="@string/title_activity_add_vehicle" >
         </activity>
 
         <activity
@@ -49,22 +61,69 @@
 
         <activity
             android:name=".activity.MechanicActivity"
-            android:label="MechanicActivity" >
+            android:label="@string/title_activity_mechanic"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.weel.mobile.android.activity.DashboardActivity" />
         </activity>
 
         <activity
             android:name=".activity.MaintenanceActivity"
-            android:label="MaintenanceActivity" >
-        </activity>
+            android:label="@string/title_activity_maintenance"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
 
-        <activity
-            android:name=".activity.DealsActivity"
-            android:label="DealsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.weel.mobile.android.activity.DashboardActivity" />
         </activity>
 
         <activity
             android:name=".activity.RoadsideActivity"
-            android:label="RoadsideActivity" >
+            android:label="@string/title_activity_roadside_assistance"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.weel.mobile.android.activity.DashboardActivity" />
+        </activity>
+
+        <activity
+            android:name=".activity.ServiceHistoryActivity"
+            android:label="@string/title_activity_service_history"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.weel.mobile.android.activity.DashboardActivity" />
+        </activity>
+
+        <activity
+            android:name=".activity.AddServiceRecordActivity"
+            android:label="@string/title_activity_add_service_record"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".activity.ServiceRecordActivity"
+            android:label="@string/title_activity_service_record"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".activity.DealsActivity"
+            android:label="@string/title_activity_deals"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.weel.mobile.android.activity.DashboardActivity" />
         </activity>
 
         <service
@@ -78,5 +137,17 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
+
+        <service
+            android:name=".service.LocationAddressService"
+            android:exported="false"></service>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA3cd54EYNPmM2ewri1it0laKHC6rjoOSk" />
     </application>
 </manifest>

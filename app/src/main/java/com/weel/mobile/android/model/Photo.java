@@ -1,9 +1,11 @@
 package com.weel.mobile.android.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jeremy.beckman on 2015-10-07.
  */
-public class Photo {
+public class Photo implements Serializable {
     static final long serialVersionUID = 0L;
 
     private Long id;

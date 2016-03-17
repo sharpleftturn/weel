@@ -58,6 +58,8 @@ public class RoadsideActivity extends WeeLActivity implements RoadsideListFragme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roadside);
 
+        addToolbar();
+
         incident = new RoadsideIncident();
 
         Intent intent = getIntent();
@@ -79,10 +81,23 @@ public class RoadsideActivity extends WeeLActivity implements RoadsideListFragme
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        startLocationService();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopLocationService();
+
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
-        locationService = LocationService.getInstance(this);
+        // locationService = LocationService.getInstance(this);
         latestLocation = locationService.getLocation();
 
         if (latestLocation != null) {
@@ -105,6 +120,18 @@ public class RoadsideActivity extends WeeLActivity implements RoadsideListFragme
 
     }
 
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count > 0) {
+            roadsideCallTextView.setVisibility(View.GONE);
+            roadsideButton.setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     public void onFragmentInteraction(Object data) {
         incident.setType(String.valueOf(data));
@@ -129,6 +156,12 @@ public class RoadsideActivity extends WeeLActivity implements RoadsideListFragme
     @Override
     public void onClick(View view) {
         createRoadsideIncident();
+    }
+
+    @Override
+    protected void addToolbar() {
+        super.addToolbar();
+        toolbar.setTitle(R.string.roadside_toolbar_label);
     }
 
     private void initializeMap(final Location location) {
@@ -168,6 +201,16 @@ public class RoadsideActivity extends WeeLActivity implements RoadsideListFragme
 
     }
 
+    private void startLocationService() {
+        locationService = LocationService.getInstance(this);
+        locationService.startService();
+    }
+
+    private void stopLocationService() {
+        locationService = LocationService.getInstance(this);
+        locationService.stopService();
+    }
+
     private void updateLocation(Location location) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         RoadsideLocationFragment fragment = (RoadsideLocationFragment) fragmentManager.findFragmentByTag("roadside_location");
@@ -181,7 +224,7 @@ public class RoadsideActivity extends WeeLActivity implements RoadsideListFragme
         new RoadsideWorkerTask().execute(params);
     }
 
-    private void startCall(String roadsidePhone) {
+    private void startCall(String roadsidePhone) throws SecurityException {
         String path = "tel:" + roadsidePhone;
         Uri uri = Uri.parse(path);
 
@@ -194,13 +237,13 @@ public class RoadsideActivity extends WeeLActivity implements RoadsideListFragme
         List<String> options = new ArrayList<String>();
 
         for (IncidentSource item : source) {
-            String option = String.format(getString(R.string.option_call), item.getProgram());
+            String option = item.getProgram();
             options.add(option);
         }
 
         final ArrayAdapter<String> adapter = new ArrayAdapter(this, R.layout.roadside_oem_item, options);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT); // THEME_HOLO_LIGHT deprecated in API level 23
         builder.setTitle(getString(R.string.roadside_oem_title));
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
@@ -224,26 +267,30 @@ public class RoadsideActivity extends WeeLActivity implements RoadsideListFragme
 
     private class RoadsideWorkerTask extends AsyncTask<Bundle, Void, RoadsideIncident> {
 
+        RoadsideService service;
+
         @Override
         protected RoadsideIncident doInBackground(Bundle... params) {
             Bundle data = params[0];
             long vehicleId = data.getLong(EXTRA_VEHICLE_ID);
 
-            RoadsideService service = new RoadsideService();
+            service = new RoadsideService();
 
-            String url = getString(R.string.api_url) + getString(R.string.roadside_uri);
+            String url = String.format(getString(R.string.api_url) + getString(R.string.roadside_uri), vehicleId);
             return service.addRoadsideIncident(url, vehicleId, authToken, incident.getLatitude(), incident.getLongitude(), incident.getType());
         }
 
         @Override
         protected void onPostExecute(RoadsideIncident data) {
-            List<IncidentSource> source = data.getSource();
-            if (source.size() > 1) {
-                openCallOptions(source);
-            } else if (source.size() == 1) {
-                startCall(source.get(0).getPhone());
+            if (service.hasError()) {
+                showSingleButtonAlert(service.getErrorMessage());
             } else {
-
+                List<IncidentSource> source = data.getSource();
+                if (source.size() > 1) {
+                    openCallOptions(source);
+                } else if (source.size() == 1) {
+                    startCall(source.get(0).getPhone());
+                }
             }
         }
     }

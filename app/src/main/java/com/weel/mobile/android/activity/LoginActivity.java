@@ -29,8 +29,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public static final String EXTRA_ACCOUNT_KEY = "com.weel.mobile.android.extras.loginActivity.ACCOUNT_KEY";
     public static final String EXTRA_USER_DATA = "com.weel.mobile.android.extras.loginActivity.USER_DATA";
 
-    private final AuthenticationService service = new AuthenticationService();
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -110,14 +108,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
             accountManager.addAccountExplicitly(account, accountKey, null);
             accountManager.setAuthToken(account, AUTHTOKEN_TYPE_API_ACCESS, authtoken);
-
         } else {
             accountManager.setPassword(account, accountKey);
         }
 
         data.putParcelable(AccountManager.KEY_ACCOUNTS, account);
 
-        Intent intent = new Intent();
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(AccountManager.KEY_ACCOUNT_NAME, accountName);
         intent.putExtra(AccountManager.KEY_PASSWORD, accountKey);
         intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, accountType);
@@ -126,12 +123,14 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         setAccountAuthenticatorResult(data);
         setResult(RESULT_OK, intent);
 
-        finish();
+        startActivity(intent);
     }
 
     private class LoginWorkerTask extends AsyncTask<Bundle, Void, Intent> {
         String authToken;
         String accountType;
+
+        final AuthenticationService service = new AuthenticationService();
 
         public LoginWorkerTask() {
 
@@ -140,7 +139,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         @Override
         protected Intent doInBackground(Bundle... params) {
             Bundle param = params[0];
-            String url = param.getString(ApplicationResources.RESOURCE_API_URL);
+            String url = getString(R.string.api_url) + getString(R.string.api_authenticate_uri);
             String username = param.getString(AccountManager.KEY_ACCOUNT_NAME);
             String key = param.getString(EXTRA_ACCOUNT_KEY);
             accountType = param.getString(AccountManager.KEY_ACCOUNT_TYPE);

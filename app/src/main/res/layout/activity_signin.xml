@@ -4,6 +4,45 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+    <View android:id="@+id/banner_bckgrd"
+        android:layout_width="match_parent"
+        android:layout_height="196dp"
+        android:background="#29b473" >
+    </View>
+
+    <ImageView android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/weel_icon_128_176_dp" />
+
+    <TextView android:id="@+id/login_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/logo"
+        android:layout_marginTop="68dp"
+        android:textSize="24sp"
+        android:textColor="#ffffff"
+        android:text="@string/login_message_1" />
+
+    <ImageView
+        android:id="@+id/brand_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_message"
+        android:layout_toRightOf="@+id/logo"
+        android:src="@drawable/wordmark_white_110dp"/>
+
+    <TextView android:id="@+id/login_message_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/brand_message"
+        android:layout_below="@+id/login_message"
+        android:layout_alignBaseline="@+id/brand_message"
+        android:layout_marginLeft="8dp"
+        android:textSize="24sp"
+        android:textColor="#ffffff"
+        android:text="@string/login_message_2" />
+
     <LinearLayout
         android:id="@+id/login_controls"
         android:layout_width="match_parent"
@@ -12,6 +51,7 @@
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         android:layout_marginTop="4dp"
+        android:layout_below="@+id/banner_bckgrd"
         android:orientation="vertical">
 
         <EditText
@@ -41,6 +81,7 @@
         android:layout_above="@+id/signup"
         android:layout_centerInParent="true"
         android:elevation="4dp"
+        android:background="@drawable/weel_button"
         android:text="@string/action_login"
         android:textColor="#ffffff" />
 

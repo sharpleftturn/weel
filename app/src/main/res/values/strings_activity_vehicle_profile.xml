@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="estimated_mileage_label">Estimated annual travel</string>
+    <string name="vin_label">VIN</string>
+    <string name="ownership_type_label">Ownership</string>
+    <string name="odometer_label">Odometer reading</string>
+    <string name="action_save_profile">SAVE</string>
 </resources>

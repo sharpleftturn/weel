@@ -8,6 +8,8 @@ import java.util.List;
  * Created by jeremy.beckman on 2016-01-28.
  */
 public class RoadsideIncident implements Serializable {
+    static final long serialVersionUID = 0L;
+
     private long id;
     private String address;
     private String routing;

@@ -38,15 +38,20 @@ public final class LocationService extends Service implements LocationListener {
     public void startService() {
         if (isNetworkEnabled()) {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, Constants.MIN_INTERVAL_UPDATES, Constants.MIN_DISTANCE_LOCATION_UPDATES, this);
+
             if (locationManager != null) {
                 location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             }
         }
 
-        if (isGPSEnabled()) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MIN_INTERVAL_UPDATES, Constants.MIN_DISTANCE_LOCATION_UPDATES, this);
-            if (locationManager != null) {
-                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (location == null) {
+
+            if (isGPSEnabled()) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MIN_INTERVAL_UPDATES, Constants.MIN_DISTANCE_LOCATION_UPDATES, this);
+
+                if (locationManager != null) {
+                    location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                }
             }
         }
     }

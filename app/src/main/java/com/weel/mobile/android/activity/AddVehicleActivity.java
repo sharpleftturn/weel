@@ -50,6 +50,8 @@ public class AddVehicleActivity extends WeeLActivity implements AddVehicleFragme
         super.onCreate(icicle);
         setContentView(R.layout.activity_add_vehicle);
 
+        addToolbar();
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         user = (User) extras.get(EXTRA_USERDATA);
@@ -109,6 +111,12 @@ public class AddVehicleActivity extends WeeLActivity implements AddVehicleFragme
                 vehicle.setYearId(modelYear.getId());
             }
         }
+    }
+
+    @Override
+    protected void addToolbar() {
+        super.addToolbar();
+        toolbar.setTitle(R.string.title_activity_add_vehicle);
     }
 
     private void addControlListeners() {
@@ -218,16 +226,7 @@ public class AddVehicleActivity extends WeeLActivity implements AddVehicleFragme
             data.putSerializable(EXTRA_VEHICLEDATA, vehicle);
             data.putString(AccountManager.KEY_AUTHTOKEN, authToken);
 
-
             saveVehicle(data);
-
-            if (vehicle != null) {
-                Intent vehicleProfileIntent = new Intent(AddVehicleActivity.this, VehicleProfileActivity.class);
-                vehicleProfileIntent.putExtra(VehicleProfileActivity.EXTRA_VEHICLEDATA, vehicle);
-                vehicleProfileIntent.putExtra(VehicleProfileActivity.EXTRA_USERDATA, user);
-                vehicleProfileIntent.putExtra(VehicleProfileActivity.EXTRA_AUTHTOKEN, authToken);
-                startActivity(vehicleProfileIntent);
-            }
         } else {
             showError(getString(R.string.vehicle_selection_error_message));
         }
@@ -235,15 +234,26 @@ public class AddVehicleActivity extends WeeLActivity implements AddVehicleFragme
 
     private Vehicle saveVehicle(Bundle params) {
         Vehicle selectedVehicle = (Vehicle) params.getSerializable(EXTRA_VEHICLEDATA);
-//        AsyncTask<Vehicle, Void, Vehicle> asyncTask = new AddVehicleWorkerTask().execute(selectedVehicle);
+        AsyncTask<Vehicle, Void, Vehicle> asyncTask = new AddVehicleWorkerTask().execute(selectedVehicle);
 
-//        try {
-//            vehicle = asyncTask.get();
-//        } catch (ExecutionException ee) {
-//        } catch (InterruptedException ie) {
-//        }
+        try {
+            vehicle = asyncTask.get();
+            showVehicleProfile(vehicle);
+        } catch (ExecutionException ee) {
+        } catch (InterruptedException ie) {
+        }
 
         return vehicle = selectedVehicle;
+    }
+
+    private void showVehicleProfile(Vehicle vehicleReturned) {
+        if (vehicleReturned != null) {
+            Intent vehicleProfileIntent = new Intent(AddVehicleActivity.this, VehicleProfileActivity.class);
+            vehicleProfileIntent.putExtra(VehicleProfileActivity.EXTRA_VEHICLEDATA, vehicleReturned);
+            vehicleProfileIntent.putExtra(VehicleProfileActivity.EXTRA_USERDATA, user);
+            vehicleProfileIntent.putExtra(VehicleProfileActivity.EXTRA_AUTHTOKEN, authToken);
+            startActivity(vehicleProfileIntent);
+        }
     }
 
     private boolean vehicleSelected() {

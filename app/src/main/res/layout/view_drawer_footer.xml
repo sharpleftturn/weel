@@ -13,6 +13,6 @@
         android:drawablePadding="12dp"
         android:padding="12dp"
         android:tag="footer"
-        android:text="@string/action_logout"
+        android:text="@string/action_signout"
         android:textSize="14sp" />
 </RelativeLayout>

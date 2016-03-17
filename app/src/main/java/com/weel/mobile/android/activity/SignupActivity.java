@@ -12,7 +12,6 @@ import android.widget.EditText;
 import com.weel.mobile.android.R;
 import com.weel.mobile.android.model.User;
 import com.weel.mobile.android.service.AuthenticationService;
-import com.weel.mobile.android.resource.ApplicationResources;
 
 import java.io.IOException;
 
@@ -34,6 +33,8 @@ public class SignupActivity extends WeeLActivity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_signup);
+
+        addToolbar();
 
         Button submitButton = (Button) findViewById(R.id.submit);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +63,6 @@ public class SignupActivity extends WeeLActivity {
         String password = passwordEdit.getText().toString();
 
         Bundle params = new Bundle();
-        params.putString(ApplicationResources.RESOURCE_API_URL, getString(R.string.api_url));
         params.putString(EXTRA_FULLNAME, fullname);
         params.putString(EXTRA_EMAIL, username);
         params.putString(EXTRA_PASSWORD, password);
@@ -71,6 +71,12 @@ public class SignupActivity extends WeeLActivity {
 
         AsyncTask<Bundle, Void, Bundle> asyncTask = new SignupWorkerTask().execute(params);
 
+    }
+
+    @Override
+    protected void addToolbar() {
+        super.addToolbar();
+        toolbar.setTitle(R.string.title_activity_signup);
     }
 
     protected void callRemoteAPI(String remoteUri, Bundle params) {
@@ -107,7 +113,7 @@ public class SignupActivity extends WeeLActivity {
         protected Bundle doInBackground(Bundle... params) {
             Bundle data = params[0];
 
-            String url = data.getString(ApplicationResources.RESOURCE_API_URL);
+            String url = getString(R.string.api_url) + getString(R.string.api_signup_uri);
             String username = data.getString(EXTRA_EMAIL);
             String password = data.getString(EXTRA_PASSWORD);
             String name = data.getString(EXTRA_FULLNAME);

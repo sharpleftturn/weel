@@ -1,9 +1,12 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.weel.mobile.android.activity.VehicleProfileActivity">
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="#ffffff" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -116,31 +119,41 @@
 
             <Button
                 android:id="@+id/action_save"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="88dp"
                 android:layout_height="36dp"
                 android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/action_cancel"
-                android:layout_marginTop="18dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="18dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_toLeftOf="@+id/action_cancel"
+                android:text="@string/action_save_profile"
                 android:textColor="#29b473"
-                android:textStyle="bold"
-                android:text="@string/action_manual_save"
-                style="?android:attr/borderlessButtonStyle" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/action_cancel"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="88dp"
                 android:layout_height="36dp"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:layout_below="@+id/odometer_value"
-                android:layout_marginTop="18dp"
-                android:layout_marginRight="18dp"
                 android:layout_marginBottom="18dp"
-                android:textStyle="bold"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="18dp"
                 android:text="@string/action_cancel"
-                android:textColor="#29b473" />
+                android:textColor="#29b473"
+                android:textStyle="bold" />
         </RelativeLayout>
     </ScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:elevation="4dp"
+        android:theme="@style/CustomActionBarOverlay" />
+
+</RelativeLayout>

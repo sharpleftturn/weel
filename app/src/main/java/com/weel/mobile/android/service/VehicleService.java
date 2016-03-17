@@ -3,15 +3,13 @@ package com.weel.mobile.android.service;
 import android.support.annotation.Nullable;
 import android.util.JsonReader;
 import android.util.JsonToken;
+import android.util.Pair;
 
 import com.weel.mobile.android.model.Make;
 import com.weel.mobile.android.model.Model;
 import com.weel.mobile.android.model.ModelYear;
 import com.weel.mobile.android.model.Photo;
 import com.weel.mobile.android.model.Vehicle;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -171,18 +169,18 @@ public class VehicleService extends WeeLService {
     }
 
     private Vehicle addVehicle(String url, long model, long make, long year, @Nullable String vin, @Nullable String name, String token) throws IOException {
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("session_hash", token));
-        params.add(new BasicNameValuePair("model_id", String.valueOf(model)));
-        params.add(new BasicNameValuePair("make_id", String.valueOf(make)));
-        params.add(new BasicNameValuePair("model_year_id", String.valueOf(year)));
+        List<Pair<String, String>> params = new ArrayList<Pair<String, String>>();
+        params.add(new Pair("session_hash", token));
+        params.add(new Pair("model_id", String.valueOf(model)));
+        params.add(new Pair("make_id", String.valueOf(make)));
+        params.add(new Pair("model_year_id", String.valueOf(year)));
 
         if (vin != null) {
-            params.add(new BasicNameValuePair("vin", vin));
+            params.add(new Pair("vin", vin));
         }
 
         if (name != null) {
-            params.add(new BasicNameValuePair("name", name));
+            params.add(new Pair("name", name));
         }
 
         JsonReader jsonReader = postData(url, params);
@@ -200,18 +198,18 @@ public class VehicleService extends WeeLService {
     }
 
     private Vehicle updateUserVehicle(String url, Vehicle vehicle, String token) throws IOException {
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(" user_vehicle_id", String.valueOf(vehicle.getId())));
-        params.add(new BasicNameValuePair("session_hash", token));
-        params.add(new BasicNameValuePair("user_vehicle[name]", vehicle.getName()));
-        params.add(new BasicNameValuePair("user_vehicle[vin]", vehicle.getVin()));
-        params.add(new BasicNameValuePair("user_vehicle[odometer_value]", String.valueOf(vehicle.getOdometer())));
-        params.add(new BasicNameValuePair("user_vehicle[annual_mileage]", String.valueOf(vehicle.getAnnualDistance())));
-        params.add(new BasicNameValuePair("user_vehicle[status_when_purchased]", vehicle.getOwnership()));
+        List<Pair<String, String>> params = new ArrayList<Pair<String, String>>();
+        params.add(new Pair(" user_vehicle_id", String.valueOf(vehicle.getId())));
+        params.add(new Pair("session_hash", token));
+        params.add(new Pair("user_vehicle[name]", vehicle.getName()));
+        params.add(new Pair("user_vehicle[vin]", vehicle.getVin()));
+        params.add(new Pair("user_vehicle[odometer_value]", String.valueOf(vehicle.getOdometer())));
+        params.add(new Pair("user_vehicle[annual_mileage]", String.valueOf(vehicle.getAnnualDistance())));
+        params.add(new Pair("user_vehicle[status_when_purchased]", vehicle.getOwnership()));
 
         Date inServiceDate = vehicle.getInServiceDate();
         if (inServiceDate != null) {
-            params.add(new BasicNameValuePair("user_vehicle[in_service_date]", inServiceDate.toString()));
+            params.add(new Pair("user_vehicle[in_service_date]", inServiceDate.toString()));
         }
         JsonReader jsonReader = postData(url, params);
         return readUpdateVehicleJson(jsonReader);
@@ -409,7 +407,6 @@ public class VehicleService extends WeeLService {
             } else if (name.equals("vin")) {
                 vehicle.setVin(reader.nextString());
             } else if (name.equals("odometer_value") && reader.peek() != JsonToken.NULL) {
-                reader.peek();
                 vehicle.setOdometer(reader.nextInt());
             } else if (name.equals("annual_mileage") && reader.peek() != JsonToken.NULL) {
                 vehicle.setAnnualDistance(reader.nextInt());

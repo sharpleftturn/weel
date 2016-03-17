@@ -36,8 +36,7 @@
             android:background="#00000000"
             android:maxLines="3"
             android:singleLine="false"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/location_city"

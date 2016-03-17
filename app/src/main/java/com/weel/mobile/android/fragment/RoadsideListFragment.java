@@ -114,7 +114,7 @@ public class RoadsideListFragment extends ListFragment implements View.OnClickLi
     private void addListHeaderView(View view) {
         ListView listView = (ListView) view.findViewById(android.R.id.list);
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.roadside_list_header, listView, false);
+        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.fragment_roadside_list_header, listView, false);
         listView.addHeaderView(header);
     }
 }

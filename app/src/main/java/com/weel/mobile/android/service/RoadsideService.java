@@ -4,12 +4,10 @@ import android.support.annotation.Nullable;
 import android.util.JsonReader;
 import android.util.JsonToken;
 import android.util.Log;
+import android.util.Pair;
 
 import com.weel.mobile.android.model.IncidentSource;
 import com.weel.mobile.android.model.RoadsideIncident;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +18,10 @@ import java.util.List;
  */
 public class RoadsideService extends WeeLService {
     private static final String TAG = "RoadsideService";
+
+    public RoadsideService() {
+        super();
+    }
 
     public RoadsideIncident getRoadsideIncident(String url, long vehicleId, String authToken) {
 
@@ -44,20 +46,21 @@ public class RoadsideService extends WeeLService {
     }
 
     private RoadsideIncident createRoadsideIncident(String url, long vehicleId, String token, @Nullable Double latitude, @Nullable Double longitude, String type) throws IOException {
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("user_vehicle_id", String.valueOf(vehicleId)));
-        params.add(new BasicNameValuePair("session_hash", token));
-        params.add(new BasicNameValuePair("type", type));
+        List<Pair<String, String>> params = new ArrayList<>();
+        params.add(new Pair("user_vehicle_id", String.valueOf(vehicleId)));
+        params.add(new Pair("session_hash", token));
+        params.add(new Pair("type", type));
 
         if (latitude != null) {
-            params.add(new BasicNameValuePair("latitude", String.valueOf(latitude)));
+            params.add(new Pair("latitude", String.valueOf(latitude)));
         }
 
         if (longitude != null) {
-            params.add(new BasicNameValuePair("longitude", String.valueOf(longitude)));
+            params.add(new Pair("longitude", String.valueOf(longitude)));
         }
 
         JsonReader jsonReader = postData(url, params);
+
         return readAddRoadsideIncident(jsonReader);
     }
 
@@ -91,11 +94,20 @@ public class RoadsideService extends WeeLService {
                 incident.setId(reader.nextLong());
             } else if (name.equals("address")) {
                 incident.setAddress(reader.nextString());
-            } else if (name.equals("latitude") && reader.peek() != JsonToken.NULL) {
-                incident.setLatitude(reader.nextDouble());
-            } else if (name.equals("longitude") && reader.peek() != JsonToken.NULL) {
-                incident.setLongitude(reader.nextDouble());
-            } else if (name.equals("type")) {
+            } else if (name.equals("latitude") && reader.peek() == JsonToken.STRING) {
+                String lat = reader.nextString();
+                 if (!lat.isEmpty()) {
+                     Double latitude = Double.valueOf(lat);
+                     incident.setLatitude(latitude);
+                 }
+
+            } else if (name.equals("longitude") && reader.peek() == JsonToken.STRING) {
+                String lng = reader.nextString();
+                if (!lng.isEmpty()) {
+                    Double longitude = Double.valueOf(lng);
+                    incident.setLongitude(longitude);
+                }
+            } else if (name.equals("type") && reader.peek() != JsonToken.NULL) {
                 incident.setType(reader.nextString());
             } else if (name.equals("routing") && reader.peek() != JsonToken.NULL) {
                 incident.setRouting(reader.nextString());
@@ -103,9 +115,9 @@ public class RoadsideService extends WeeLService {
                 incident.setRating(reader.nextInt());
             } else if (name.equals("call_feedback") && reader.peek() != JsonToken.NULL) {
                 incident.setFeedback(reader.nextString());
-            } else if (name.equals("weel_roadside") && reader.peek() != JsonToken.NULL) {
+            } else if (name.equals("weel_roadside") && reader.peek() == JsonToken.BEGIN_OBJECT) {
                 incident.getSource().add(readIncidentSource(reader));
-            } else if (name.equals("oem_roadside") && reader.peek() != JsonToken.NULL) {
+            } else if (name.equals("oem_roadside") && reader.peek() == JsonToken.BEGIN_OBJECT) {
                 incident.getSource().add(readIncidentSource(reader));
             } else {
                 reader.skipValue();
