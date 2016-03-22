@@ -1,7 +1,10 @@
 package com.weel.mobile.android.activity;
 
 import android.accounts.Account;
+import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.model.User;
 import com.weel.mobile.android.service.AuthenticationService;
 
@@ -20,7 +23,7 @@ import static com.weel.mobile.android.account.Account.AUTHTOKEN_TYPE_API_ACCESS;
 /**
  * Created by jeremy.beckman on 2015-10-07.
  */
-public class SignupActivity extends WeeLActivity {
+public class SignupActivity extends AccountAuthenticatorActivity {
     public static final String EXTRA_ADD_ACCOUNT_RESULTS = "com.weel.mobile.extras.signupActivity.ADD_ACCOUNT_RESULTS";
     public static final String EXTRA_USER_DATA = "com.weel.mobile.android.extras.signupActivity.USER_DATA";
     public static final String EXTRA_FULLNAME = "com.weel.mobile.extras.FULLNAME";
@@ -28,13 +31,12 @@ public class SignupActivity extends WeeLActivity {
     public static final String EXTRA_PASSWORD = "com.weel.mobile.extras.PASSWORD";
     public static final String EXTRA_COUPON_CODE = "com.weel.mobile.extras.COUPON_CODE";
     public static final String EXTRA_VERSION = "com.weel.mobile.extras.VERSION";
+    public static final int REQUEST_CODE = 998;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_signup);
-
-        addToolbar();
 
         Button submitButton = (Button) findViewById(R.id.submit);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -73,12 +75,6 @@ public class SignupActivity extends WeeLActivity {
 
     }
 
-    @Override
-    protected void addToolbar() {
-        super.addToolbar();
-        toolbar.setTitle(R.string.title_activity_signup);
-    }
-
     protected void callRemoteAPI(String remoteUri, Bundle params) {
 
     }
@@ -87,16 +83,21 @@ public class SignupActivity extends WeeLActivity {
         Bundle data = intent.getBundleExtra(EXTRA_ADD_ACCOUNT_RESULTS);
         User user = (User) data.getSerializable(EXTRA_USER_DATA);
 
-        authToken = user.getSession().getSession();
+        String authToken = user.getSession().getSession();
         String accountName = user.getEmail();
         String accountKey = data.getString(AccountManager.KEY_PASSWORD);
         String accountType = getString(R.string.app_account_type);
 
-        account = new Account(accountName, accountType);
+        Account account = new Account(accountName, accountType);
 
         AccountManager accountManager = AccountManager.get(getApplicationContext());
         accountManager.addAccountExplicitly(account, accountKey, null);
         accountManager.setAuthToken(account, AUTHTOKEN_TYPE_API_ACCESS, authToken);
+
+        data.putParcelable(AccountManager.KEY_ACCOUNTS, account);
+
+        setAccountAuthenticatorResult(data);
+        setResult(RESULT_OK, intent);
 
         finish();
     }
@@ -145,5 +146,18 @@ public class SignupActivity extends WeeLActivity {
 
     protected void setView() {
 
+    }
+
+    private void showSingleButtonAlert(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setPositiveButton(getString(R.string.alert_dialog_single_button_label), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 }

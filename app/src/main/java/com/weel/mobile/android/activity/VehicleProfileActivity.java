@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,7 +25,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
+import com.weel.mobile.android.config.Constants;
 import com.weel.mobile.android.model.Photo;
 import com.weel.mobile.android.model.User;
 import com.weel.mobile.android.model.Vehicle;
@@ -95,6 +97,7 @@ public class VehicleProfileActivity extends WeeLActivity {
     protected void addToolbar() {
         super.addToolbar();
         toolbar.setTitle(R.string.profile_toolbar_label);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weel_theme));
     }
 
     @Override
@@ -137,9 +140,9 @@ public class VehicleProfileActivity extends WeeLActivity {
         String ownership = vehicle.getOwnership();
 
         if (ownership != null) {
-            if (ownership.equals("New")) {
+            if (ownership.equalsIgnoreCase(getString(R.string.ownership_type_new))) {
                 spinner.setSelection(0);
-            } else if (ownership.equals("Used")) {
+            } else if (ownership.equalsIgnoreCase(getString(R.string.ownership_type_used))) {
                 spinner.setSelection(1);
             }
         }
@@ -379,7 +382,15 @@ public class VehicleProfileActivity extends WeeLActivity {
 
         @Override
         protected void onPostExecute(Vehicle vehicle) {
-            finish();
+            Context context = contextRef.get();
+
+            Intent intent = new Intent(context, DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra(Constants.USER_DATA, user);
+            intent.putExtra(Constants.VEHICLE_DATA, vehicle);
+            intent.putExtra(AccountManager.KEY_AUTHTOKEN, authToken);
+
+            context.startActivity(intent);
         }
     }
 }

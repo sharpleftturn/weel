@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.model.ServiceRecord;
 import com.weel.mobile.android.view.properties.ServiceHistoryViewProperties;
 

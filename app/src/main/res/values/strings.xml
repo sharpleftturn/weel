@@ -25,6 +25,7 @@
     <string name="selected">selected</string>
     <string name="uncaught_exception_message">Oops! Something unexpected happened</string>
     <string name="security_exception_message">App does not have permission to use this feature</string>
+    <string name="no_vehicle_exception_message">Could not find your vehicle</string>
 
     <!-- Toolbar Strings -->
     <string name="action_select_all">Select All</string>
@@ -50,6 +51,8 @@
 
     <!-- Vehicle Profile Strings -->
     <string name="profile_toolbar_label">Vehicle Profile</string>
+    <string name="ownership_type_new">new</string>
+    <string name="ownership_type_used">used</string>
 
     <!-- Roadside Strings -->
     <string name="roadside_toolbar_label">Roadside Assistance</string>
@@ -125,6 +128,10 @@
     <!-- Login Strings -->
     <string name="login_message_1">Login to your</string>
     <string name="login_message_2">account</string>
+
+    <!-- Signup Strings -->
+    <string name="signup_message_1">Sign up for your</string>
+    <string name="sinup_message_2">account</string>
 
     <!-- Activity Title Strings -->
     <string name="title_activity_vehicle_profile">Vehicle Profile</string>

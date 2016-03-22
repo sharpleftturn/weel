@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.model.ServiceRecord;
 import com.weel.mobile.android.model.Vehicle;
 import com.weel.mobile.android.service.MaintenanceRecordService;

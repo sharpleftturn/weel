@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.weel.mobile.android" >
+    package="com.weel.mobile"
+    android:versionCode="9"
+    android:versionName="1.1.0" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -25,7 +27,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".android.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -36,31 +38,31 @@
         </activity>
 
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".android.activity.LoginActivity"
             android:label="Sign In"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.SignupActivity"
+            android:name=".android.activity.SignupActivity"
             android:label="Sign Up"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".activity.DashboardActivity"
+        <activity android:name=".android.activity.DashboardActivity"
             android:screenOrientation="portrait" >
         </activity>
 
         <activity
-            android:name=".activity.AddVehicleActivity"
+            android:name=".android.activity.AddVehicleActivity"
             android:label="@string/title_activity_add_vehicle" >
         </activity>
 
         <activity
-            android:name=".activity.VehicleProfileActivity"
+            android:name=".android.activity.VehicleProfileActivity"
             android:label="@string/title_activity_vehicle_profile" >
         </activity>
 
         <activity
-            android:name=".activity.MechanicActivity"
+            android:name=".android.activity.MechanicActivity"
             android:label="@string/title_activity_mechanic"
             android:screenOrientation="portrait"
             android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
@@ -71,7 +73,7 @@
         </activity>
 
         <activity
-            android:name=".activity.MaintenanceActivity"
+            android:name=".android.activity.MaintenanceActivity"
             android:label="@string/title_activity_maintenance"
             android:screenOrientation="portrait"
             android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
@@ -82,7 +84,7 @@
         </activity>
 
         <activity
-            android:name=".activity.RoadsideActivity"
+            android:name=".android.activity.RoadsideActivity"
             android:label="@string/title_activity_roadside_assistance"
             android:screenOrientation="portrait"
             android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
@@ -93,7 +95,7 @@
         </activity>
 
         <activity
-            android:name=".activity.ServiceHistoryActivity"
+            android:name=".android.activity.ServiceHistoryActivity"
             android:label="@string/title_activity_service_history"
             android:screenOrientation="portrait"
             android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
@@ -104,19 +106,19 @@
         </activity>
 
         <activity
-            android:name=".activity.AddServiceRecordActivity"
+            android:name=".android.activity.AddServiceRecordActivity"
             android:label="@string/title_activity_add_service_record"
             android:screenOrientation="portrait" >
         </activity>
 
         <activity
-            android:name=".activity.ServiceRecordActivity"
+            android:name=".android.activity.ServiceRecordActivity"
             android:label="@string/title_activity_service_record"
             android:screenOrientation="portrait" >
         </activity>
 
         <activity
-            android:name=".activity.DealsActivity"
+            android:name=".android.activity.DealsActivity"
             android:label="@string/title_activity_deals"
             android:screenOrientation="portrait"
             android:parentActivityName="com.weel.mobile.android.activity.DashboardActivity" >
@@ -127,7 +129,7 @@
         </activity>
 
         <service
-            android:name=".service.AuthenticatorService"
+            android:name=".android.service.AuthenticatorService"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
@@ -139,7 +141,7 @@
         </service>
 
         <service
-            android:name=".service.LocationAddressService"
+            android:name=".android.service.LocationAddressService"
             android:exported="false"></service>
 
         <meta-data

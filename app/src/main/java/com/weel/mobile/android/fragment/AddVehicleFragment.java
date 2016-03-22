@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.adapter.MakeSpinnerAdapter;
 import com.weel.mobile.android.adapter.ModelSpinnerAdapter;
 import com.weel.mobile.android.adapter.YearSpinnerAdapter;

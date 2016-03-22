@@ -40,6 +40,7 @@ public class AccountAuthenticator extends AbstractAccountAuthenticator {
                              Bundle options)
             throws NetworkErrorException {
         final Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
 
         final Bundle result = new Bundle();
@@ -92,7 +93,7 @@ public class AccountAuthenticator extends AbstractAccountAuthenticator {
         }
 
         final Intent intent = new Intent(context, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
 
         final Bundle bundle = new Bundle();

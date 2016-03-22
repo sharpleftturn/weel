@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.config.Constants;
 import com.weel.mobile.android.fragment.ServiceHistoryEmptyFragment;
 import com.weel.mobile.android.fragment.ServiceHistoryListFragment;
@@ -101,7 +102,8 @@ public class ServiceHistoryActivity extends WeeLActivity implements ServiceHisto
     @Override
     protected void addToolbar() {
         super.addToolbar();
-        toolbar.setTitle(R.string.service_toolbar_label);
+        toolbar.setTitle(R.string.title_activity_service_history);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weel_theme));
     }
 
     @Override

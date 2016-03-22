@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.config.Constants;
 import com.weel.mobile.android.fragment.MaintenancePageFragment;
 import com.weel.mobile.android.model.Vehicle;
@@ -45,6 +46,7 @@ public class MaintenanceActivity extends WeeLActivity {
     protected void addToolbar() {
         super.addToolbar();
         toolbar.setTitle(R.string.maintenance_toolbar_label);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weel_maintenance_theme));
     }
 
     @Override

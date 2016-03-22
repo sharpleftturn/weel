@@ -10,7 +10,7 @@
     <!-- ActionBar styles -->
     <style name="CustomActionBarOverlay"
         parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:background">#29b473</item>
+        <item name="colorPrimary">#29b473</item>
         <item name="android:textColorPrimary">#ffffff</item>
     </style>
 

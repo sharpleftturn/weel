@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.config.Constants;
 import com.weel.mobile.android.model.User;
 import com.weel.mobile.android.model.Vehicle;
@@ -51,11 +51,24 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends WeeLActivity {
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SignupActivity.REQUEST_CODE) {
+            authenticate();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand_splash);
-
         authenticate();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -76,8 +89,8 @@ public class MainActivity extends WeeLActivity {
 
     private void startSignupActivity() {
         Intent intent = new Intent(this, SignupActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, SignupActivity.REQUEST_CODE);
     }
 
     final AccountManagerCallback<Bundle> getAuthCallback = new AccountManagerCallback<Bundle>() {
@@ -159,10 +172,16 @@ public class MainActivity extends WeeLActivity {
 
         } catch (InterruptedException ie) {
 
+        } catch (IOException ioe) {
+            showSingleButtonAlert(ioe.getMessage());
         }
     }
 
-    private void startDashboard(Vehicle vehicle) {
+    private void startDashboard(Vehicle vehicle) throws IOException {
+        if (vehicle == null) {
+            throw new IOException(getString(R.string.no_vehicle_exception_message));
+        }
+
         Intent intent = new Intent(this, DashboardActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
@@ -187,6 +206,8 @@ public class MainActivity extends WeeLActivity {
 
         intent.putExtras(data);
         startActivity(intent);
+
+        finish();
     }
 
     private class GetUserWorkerTask extends AsyncTask<String, Void, User> {

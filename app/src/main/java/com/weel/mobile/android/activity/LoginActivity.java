@@ -13,10 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.model.User;
 import com.weel.mobile.android.resource.ApplicationResources;
 import com.weel.mobile.android.service.AuthenticationService;
+import com.weel.mobile.android.util.Validator;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -28,6 +29,9 @@ import static com.weel.mobile.android.account.Account.AUTHTOKEN_TYPE_API_ACCESS;
 public class LoginActivity extends AccountAuthenticatorActivity {
     public static final String EXTRA_ACCOUNT_KEY = "com.weel.mobile.android.extras.loginActivity.ACCOUNT_KEY";
     public static final String EXTRA_USER_DATA = "com.weel.mobile.android.extras.loginActivity.USER_DATA";
+
+    private boolean isEmailValid;
+    private boolean isPasswordValid;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -123,7 +127,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         setAccountAuthenticatorResult(data);
         setResult(RESULT_OK, intent);
 
-        startActivity(intent);
+        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(mainIntent);
+
+        finish();
     }
 
     private class LoginWorkerTask extends AsyncTask<Bundle, Void, Intent> {
@@ -178,6 +186,26 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 finishSignIn(data);
             }
         }
+    }
+
+    private void addValidators() {
+        TextView usernameView = (TextView) findViewById(R.id.username);
+        usernameView.addTextChangedListener(new Validator(usernameView) {
+            @Override
+            public void validate(TextView textView, String text) {
+                String pattern = "(.*)@(.*)\\.[a-zA-Z]{2,3}";
+                isEmailValid = text.matches(pattern);
+            }
+        });
+
+        TextView passwordView = (TextView) findViewById(R.id.password);
+        passwordView.addTextChangedListener(new Validator(passwordView) {
+            @Override
+            public void validate(TextView textView, String text) {
+                String pattern = "^[a-zA-Z0-9@!#$%&*?]{6,}";
+                isPasswordValid = text.matches(pattern);
+            }
+        });
     }
 
     private void showSingleButtonAlert(String message) {

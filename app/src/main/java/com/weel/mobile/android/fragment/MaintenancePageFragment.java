@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.adapter.MaintenancePagerAdapter;
 import com.weel.mobile.android.model.Maintenance;
 import com.weel.mobile.android.model.Vehicle;

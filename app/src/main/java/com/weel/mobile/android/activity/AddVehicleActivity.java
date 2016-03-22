@@ -10,11 +10,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.fragment.AddVehicleFragment;
 import com.weel.mobile.android.model.Make;
 import com.weel.mobile.android.model.Model;
@@ -117,6 +118,7 @@ public class AddVehicleActivity extends WeeLActivity implements AddVehicleFragme
     protected void addToolbar() {
         super.addToolbar();
         toolbar.setTitle(R.string.title_activity_add_vehicle);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weel_theme));
     }
 
     private void addControlListeners() {
@@ -364,12 +366,7 @@ public class AddVehicleActivity extends WeeLActivity implements AddVehicleFragme
 
         @Override
         protected void onPostExecute(Vehicle vehicle) {
-            for (Vehicle item : vehicles) {
-                if (item.getId() == vehicle.getId()) {
-                    return;
-                }
-            }
-            vehicles.add(vehicle);
+
         }
     }
 }

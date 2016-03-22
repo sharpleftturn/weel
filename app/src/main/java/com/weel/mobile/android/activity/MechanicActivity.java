@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.config.Constants;
 import com.weel.mobile.android.model.IncidentSource;
 import com.weel.mobile.android.model.MechanicIncident;

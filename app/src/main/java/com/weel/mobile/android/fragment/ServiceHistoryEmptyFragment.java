@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 
 /**
  * Created by jeremy.beckman on 2016-02-24.

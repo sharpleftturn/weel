@@ -406,11 +406,11 @@ public class VehicleService extends WeeLService {
                 vehicle.setName(reader.nextString());
             } else if (name.equals("vin")) {
                 vehicle.setVin(reader.nextString());
-            } else if (name.equals("odometer_value") && reader.peek() != JsonToken.NULL) {
+            } else if (name.equals("odometer_value") && reader.peek() == JsonToken.NUMBER) {
                 vehicle.setOdometer(reader.nextInt());
-            } else if (name.equals("annual_mileage") && reader.peek() != JsonToken.NULL) {
+            } else if (name.equals("annual_mileage") && reader.peek() == JsonToken.NUMBER) {
                 vehicle.setAnnualDistance(reader.nextInt());
-            } else if (name.equals("status_when_purchased") && reader.peek() != JsonToken.NULL) {
+            } else if (name.equals("status_when_purchased") && reader.peek() == JsonToken.STRING) {
                 vehicle.setOwnership(reader.nextString());
             } else if (name.equals("photo") && reader.peek() == JsonToken.BEGIN_OBJECT) {
                 Photo photo = readPhoto(reader);

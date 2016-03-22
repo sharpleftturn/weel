@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.adapter.MaintenanceListAdapter;
 import com.weel.mobile.android.model.Maintenance;
 import com.weel.mobile.android.model.MaintenanceItem;

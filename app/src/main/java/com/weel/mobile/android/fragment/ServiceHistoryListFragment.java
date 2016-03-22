@@ -14,7 +14,7 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.adapter.ServiceHistoryListAdapter;
 import com.weel.mobile.android.model.ServiceRecord;
 import com.weel.mobile.android.model.Vehicle;

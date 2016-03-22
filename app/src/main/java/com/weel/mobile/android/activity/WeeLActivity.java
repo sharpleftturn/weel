@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.model.User;
 import com.weel.mobile.android.model.Vehicle;
 import com.weel.mobile.android.resource.ApplicationResources;
@@ -38,6 +38,7 @@ public abstract class WeeLActivity extends AppCompatActivity implements Thread.U
     protected Toolbar toolbar;
 
     public void uncaughtException(Thread thread, Throwable ex) {
+        String msg = ex.getMessage();
         showSingleButtonAlert(getString(R.string.uncaught_exception_message));
     }
 

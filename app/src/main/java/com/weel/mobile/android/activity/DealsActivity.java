@@ -7,10 +7,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.config.Constants;
 import com.weel.mobile.android.fragment.DealsListFragment;
 import com.weel.mobile.android.model.Deal;
@@ -126,5 +127,6 @@ public class DealsActivity extends WeeLActivity implements DealsListFragment.OnF
     protected void addToolbar() {
         super.addToolbar();
         toolbar.setTitle(R.string.title_activity_deals);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weel_deals_theme));
     }
 }

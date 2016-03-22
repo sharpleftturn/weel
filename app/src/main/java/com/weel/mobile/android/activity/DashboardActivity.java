@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.adapter.DrawerListAdapter;
 import com.weel.mobile.android.config.Constants;
 import com.weel.mobile.android.fragment.DashboardPanelsFragment;
@@ -84,6 +84,7 @@ public class DashboardActivity extends WeeLActivity implements DashboardPanelsFr
         super.addToolbar();
 
         toolbar.setTitle("");
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weel_theme));
 
         showActionBar();
 

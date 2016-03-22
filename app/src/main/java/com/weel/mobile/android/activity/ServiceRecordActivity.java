@@ -1,10 +1,11 @@
 package com.weel.mobile.android.activity;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
-import com.weel.mobile.android.R;
+import com.weel.mobile.R;
 import com.weel.mobile.android.adapter.ServiceRecordPagerAdapter;
 import com.weel.mobile.android.model.ServiceRecord;
 
@@ -28,7 +29,7 @@ public class ServiceRecordActivity extends WeeLActivity {
         super.onCreate(icicle);
         setContentView(R.layout.activity_service_record);
 
-        //getActionBar().setTitle(getString(R.string.action_history));
+        addToolbar();
 
         Bundle extras = getIntent().getExtras();
         ServiceRecord serviceRecord = (ServiceRecord) extras.getSerializable(EXTRA_SERVICE_RECORD);
@@ -48,6 +49,13 @@ public class ServiceRecordActivity extends WeeLActivity {
     @Override
     protected void callRemoteAPI(String remoteUri, Bundle params) {
 
+    }
+
+    @Override
+    protected void addToolbar() {
+        super.addToolbar();
+        toolbar.setTitle(R.string.title_activity_service_record);
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weel_theme));
     }
 
     private void loadServiceRecord(ServiceRecord serviceRecord) {
