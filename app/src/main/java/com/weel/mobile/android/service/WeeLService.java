@@ -43,7 +43,6 @@ public class WeeLService {
         String name = reader.nextName();
         if (name.equals("message")) {
             error = reader.nextString();
-
         } else {
             reader.skipValue();
         }

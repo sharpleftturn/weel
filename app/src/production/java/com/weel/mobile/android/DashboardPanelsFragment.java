@@ -1,4 +1,5 @@
-package com.weel.mobile.android.fragment;
+package com.weel.mobile.android;
+
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import com.weel.mobile.android.activity.MechanicActivity;
 import com.weel.mobile.android.activity.RoadsideActivity;
 
 /**
- * Created by jeremy.beckman on 2015-10-21.
+ * Created by jeremy.beckman on 16-03-26.
  */
 public class DashboardPanelsFragment extends Fragment {
 
@@ -53,7 +54,7 @@ public class DashboardPanelsFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Context activity) {
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;

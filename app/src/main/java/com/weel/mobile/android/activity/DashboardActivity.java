@@ -2,7 +2,6 @@ package com.weel.mobile.android.activity;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
@@ -14,13 +13,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,14 +31,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.weel.mobile.R;
+import com.weel.mobile.android.DashboardPanelsFragment;
 import com.weel.mobile.android.adapter.DrawerListAdapter;
 import com.weel.mobile.android.config.Constants;
-import com.weel.mobile.android.fragment.DashboardPanelsFragment;
 import com.weel.mobile.android.model.DrawerItem;
 import com.weel.mobile.android.model.Photo;
 import com.weel.mobile.android.model.User;
 import com.weel.mobile.android.model.Vehicle;
-import com.weel.mobile.android.resource.ApplicationResources;
 import com.weel.mobile.android.service.AuthenticationService;
 
 import java.io.IOException;
@@ -50,8 +46,6 @@ import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-
-import static com.weel.mobile.android.account.Account.AUTHTOKEN_TYPE_API_ACCESS;
 
 /**
  * Created by jeremy.beckman on 16-03-14.
