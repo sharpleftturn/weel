@@ -31,9 +31,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.weel.mobile.R;
-import com.weel.mobile.android.DashboardPanelsFragment;
 import com.weel.mobile.android.adapter.DrawerListAdapter;
 import com.weel.mobile.android.config.Constants;
+import com.weel.mobile.android.fragment.DashboardPanelsFragment;
 import com.weel.mobile.android.model.DrawerItem;
 import com.weel.mobile.android.model.Photo;
 import com.weel.mobile.android.model.User;

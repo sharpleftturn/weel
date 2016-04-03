@@ -26,6 +26,8 @@ public class DashboardPanelsFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.panel_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
+
+
         return view;
     }
 

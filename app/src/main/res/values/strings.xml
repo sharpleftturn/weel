@@ -124,6 +124,7 @@
     <string name="ask_mechanic_repair_message">You\'ve been quoted for a repair on your vehicle and don\'t trust the estimate. Our mechanics are experts on all aspects of labor and repair costs. Talk to us before you pay the quoted price.</string>
     <string name="ask_mechanic_repair_label">Repair Quotes</string>
     <string name="mechanic_toolbar_label">Live Mechanic Advice</string>
+    <string name="action_web">Website</string>
 
     <!-- Login Strings -->
     <string name="login_message_1">Login to your</string>

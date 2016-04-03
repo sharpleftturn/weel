@@ -1,6 +1,7 @@
 package com.weel.mobile.android.activity;
 
 import android.accounts.AccountManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -8,10 +9,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 
 import com.weel.mobile.R;
+import com.weel.mobile.android.adapter.DealsRecyclerViewAdapter;
 import com.weel.mobile.android.config.Constants;
 import com.weel.mobile.android.fragment.DealsListFragment;
 import com.weel.mobile.android.model.Deal;
@@ -27,6 +32,7 @@ import java.util.concurrent.ExecutionException;
 public class DealsActivity extends WeeLActivity implements DealsListFragment.OnFragmentInteractionListener {
 
     private Vehicle vehicle;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,7 @@ public class DealsActivity extends WeeLActivity implements DealsListFragment.OnF
         vehicle = (Vehicle) intent.getSerializableExtra(Constants.VEHICLE_DATA);
         authToken = intent.getStringExtra(AccountManager.KEY_AUTHTOKEN);
 
-        AsyncTask<Void, Void, ArrayList<Deal>> task = new GetDealsWorkerTask().execute();
+        AsyncTask<Void, Void, ArrayList<Deal>> task = new GetDealsWorkerTask(this).execute();
 
         try {
             ArrayList<Deal> deals = (ArrayList<Deal>) task.get();
@@ -99,8 +105,15 @@ public class DealsActivity extends WeeLActivity implements DealsListFragment.OnF
 
     private class GetDealsWorkerTask extends AsyncTask<Void, Void, ArrayList<Deal>> {
 
+        private Context context;
+
+        public GetDealsWorkerTask(Context context) {
+            this.context = context;
+        }
+
         @Override
         protected ArrayList<Deal> doInBackground(Void... params) {
+
             String url = getString(R.string.api_url) + getString(R.string.deals_uri);
             DealService service = new DealService();
             ArrayList<Deal> deals = service.getDeals(url, vehicle.getId(), authToken);
@@ -109,7 +122,8 @@ public class DealsActivity extends WeeLActivity implements DealsListFragment.OnF
 
         @Override
         protected void onPostExecute(ArrayList<Deal> deals) {
-
+            DealsRecyclerViewAdapter adapter = new DealsRecyclerViewAdapter(context, deals);
+            recyclerView.setAdapter(adapter);
         }
     }
 
