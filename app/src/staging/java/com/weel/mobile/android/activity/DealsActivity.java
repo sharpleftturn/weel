@@ -65,22 +65,9 @@ public class DealsActivity extends WeeLActivity  {
 
     private void addCardLayout() {
         recyclerView = (RecyclerView)findViewById(R.id.deals_recycler);
+        recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-    }
-
-    private void showDealInBrowser(Deal deal) {
-
-        String vendorLink = deal.getLink();
-        if (vendorLink != null && !vendorLink.equals("")) {
-            if (!vendorLink.startsWith("http")) {
-                vendorLink = getString(R.string.deals_vendor_protocol) + vendorLink;
-            }
-
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(vendorLink));
-            startActivity(browserIntent);
-            finish();
-        }
     }
 
     private class GetDealsWorkerTask extends AsyncTask<Void, Void, ArrayList<Deal>> {

@@ -1,33 +1,30 @@
 package com.weel.mobile.android.fragment;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.weel.mobile.R;
+import com.weel.mobile.android.activity.DealsActivity;
+import com.weel.mobile.android.activity.MaintenanceActivity;
+import com.weel.mobile.android.activity.MechanicActivity;
+import com.weel.mobile.android.activity.RoadsideActivity;
 
 /**
  * Created by jeremy.beckman on 16-03-26.
  */
 public class DashboardPanelsFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     private OnFragmentInteractionListener mListener;
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard_panels, container, false);
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.panel_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-
-
         return view;
     }
 
@@ -36,11 +33,30 @@ public class DashboardPanelsFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        Activity activity = getActivity();
+        View roadsideView = (View) getActivity().findViewById(R.id.top_left_panel);
+        setOnClickListener(roadsideView);
 
+        View adviceView = (View) getActivity().findViewById(R.id.top_right_panel);
+        setOnClickListener(adviceView);
+
+        View dealsView = (View) getActivity().findViewById(R.id.bottom_left_panel);
+        setOnClickListener(dealsView);
+
+        View maintenanceView = (View) getActivity().findViewById(R.id.bottom_right_panel);
+        setOnClickListener(maintenanceView);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -55,11 +71,28 @@ public class DashboardPanelsFragment extends Fragment {
         mListener = null;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    private void setOnClickListener(View view) {
+        view.setOnClickListener(new View.OnClickListener() {
 
+            public void onClick(View view) {
+                Class activityClass = null;
+                switch (view.getId()) {
+                    case R.id.top_left_panel:
+                        activityClass = MechanicActivity.class;
+                        break;
+                    case R.id.top_right_panel:
+                        activityClass = RoadsideActivity.class;
+                        break;
+                    case R.id.bottom_left_panel:
+                        activityClass = DealsActivity.class;
+                        break;
+                    case R.id.bottom_right_panel:
+                        activityClass = MaintenanceActivity.class;
+                        break;
+                }
 
+                mListener.onDashboardPanelsInteraction(activityClass);
+            }
+        });
     }
-
 }

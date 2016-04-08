@@ -44,20 +44,22 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
     @Override
     public DealsRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         final View view = LayoutInflater.from(context).inflate(R.layout.deals_card_item, null);
-        final Deal deal = sourceList.get(i);
-        DealsRecyclerViewAdapter.ViewHolder viewHolder = new DealsRecyclerViewAdapter.ViewHolder(view, new ViewHolder.DealsClickListener() {
-            @Override
-            public void onDealClick(View caller) {
-                showDealInBrowser(view, deal);
-            }
-        });
+        DealsRecyclerViewAdapter.ViewHolder viewHolder = new DealsRecyclerViewAdapter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(DealsRecyclerViewAdapter.ViewHolder viewHolder, int i) {
-        Deal item = sourceList.get(i);
-        AsyncTask<Deal, Void, Bitmap> task = new BitmapWorkerTask().execute(item);
+        final Deal deal = sourceList.get(i);
+
+        viewHolder.setOnClickListener(new ViewHolder.DealsClickListener() {
+            @Override
+            public void onDealClick(View caller) {
+                showDealInBrowser(caller, deal);
+            }
+        });
+
+        AsyncTask<Deal, Void, Bitmap> task = new BitmapWorkerTask().execute(deal);
 
         try {
             Bitmap bitmap = task.get();
@@ -71,8 +73,8 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
 
         }
 
-        viewHolder.nameTextView.setText(item.getName());
-        viewHolder.descriptionTextView.setText(item.getDescription());
+        viewHolder.nameTextView.setText(deal.getName());
+        viewHolder.descriptionTextView.setText(deal.getDescription());
     }
 
     @Override
@@ -94,9 +96,8 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
 
         private DealsClickListener listener;
 
-        public ViewHolder(View view, DealsClickListener listener) {
+        public ViewHolder(View view) {
             super(view);
-            this.listener = listener;
             logoImageView = (ImageView) view.findViewById(R.id.logo);
             nameTextView = (TextView) view.findViewById(R.id.deal_name);
             descriptionTextView = (TextView) view.findViewById(R.id.deal_description);
@@ -107,6 +108,10 @@ public class DealsRecyclerViewAdapter extends RecyclerView.Adapter<DealsRecycler
         @Override
         public void onClick(View v) {
             listener.onDealClick(v);
+        }
+
+        public void setOnClickListener(DealsClickListener listener) {
+            this.listener = listener;
         }
 
         public static interface DealsClickListener {
